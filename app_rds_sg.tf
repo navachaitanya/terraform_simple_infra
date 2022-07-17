@@ -1,6 +1,6 @@
 module "app_rds_sg" {
   source       = "terraform-aws-modules/security-group/aws"
-  create       = false
+  create       = true
   name         = "${var.app_name}-${var.rds_sg_name}-${var.app_environment}-sg"
   description  = "Security group for user-service with custom ports open within VPC"
   vpc_id       = module.app_vpc.vpc_id

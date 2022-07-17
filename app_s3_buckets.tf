@@ -1,6 +1,6 @@
 module "s3_bucket_logs" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  create_bucket = false
+  create_bucket = true
   bucket        = "logs-${var.private_s3_logs_bucket_name}-${var.app_environment}"
   acl           = var.private_s3_logs_bucket_acl
   # S3 bucket-level Public Access Block configuration
@@ -21,7 +21,7 @@ module "s3_bucket_logs" {
 
 module "s3_bucket_public" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  create_bucket = false
+  create_bucket = true
   bucket        = "${var.public_s3_bucket_name}-${var.app_environment}-pub"
   acl           = var.public_s3_bucket_acl
   attach_policy = true
@@ -59,7 +59,7 @@ module "s3_bucket_public" {
 
 module "s3_bucket_private" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  create_bucket = false
+  create_bucket = true
   bucket        = "${var.private_s3_bucket_name}-${var.app_environment}-prv"
   acl           = var.private_s3_bucket_acl
   attach_policy = false

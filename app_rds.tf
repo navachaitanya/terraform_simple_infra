@@ -1,6 +1,6 @@
 module "app_rds_postgresql" {
   source                              = "terraform-aws-modules/rds/aws"
-  create_db_instance                  = false
+  create_db_instance                  = true
   version                             = "4.5.0"
   engine                              = var.rds_engine
   engine_version                      = var.rds_engine_version
