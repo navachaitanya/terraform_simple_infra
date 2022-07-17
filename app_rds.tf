@@ -1,5 +1,6 @@
 module "app_rds_postgresql" {
   source                              = "terraform-aws-modules/rds/aws"
+  create_db_instance                  = false
   version                             = "4.5.0"
   engine                              = var.rds_engine
   engine_version                      = var.rds_engine_version
@@ -15,7 +16,6 @@ module "app_rds_postgresql" {
   password                            = var.rds_password
   port                                = "5432"
   multi_az                            = var.rds_multi_az
-  create_db_instance                  = true
   iam_database_authentication_enabled = false
   vpc_security_group_ids              = [module.app_rds_sg.security_group_id]
   maintenance_window                  = "Mon:00:00-Mon:03:00"

@@ -1,5 +1,6 @@
 module "app_ec2_instance" {
   source                               = "terraform-aws-modules/ec2-instance/aws"
+  create                               = true
   version                              = "~> 3.0"
   name                                 = "${var.app_instance_name}-${var.app_environment}"
   ami                                  = data.aws_ami.amazon_linux_2.id
@@ -31,15 +32,17 @@ module "app_ec2_instance" {
 }
 #ssh keypair for the EC2
 module "ec2_key_pair" {
-  source     = "terraform-aws-modules/key-pair/aws"
-  key_name   = "${var.app_name}-ec2-keypair"
-  public_key = var.ec2_ssh_public_key
+  source          = "terraform-aws-modules/key-pair/aws"
+  create_key_pair = true
+  key_name        = "${var.app_name}-${var.app_environment}-ec2-keypair"
+  public_key      = var.ec2_ssh_public_key
   tags = {
     Name        = "${var.app_name}-ec2-keypair"
     vpc_name    = "${var.app_vpc_name}"
     app_name    = "${var.app_name}"
     Environment = "${var.app_environment}"
     Terraform   = "true"
+    Created_Key_from_External = "yes"
   }
   depends_on = [
     module.app_vpc,

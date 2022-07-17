@@ -1,5 +1,6 @@
 module "app_alb_sg" {
   source       = "terraform-aws-modules/security-group/aws"
+  create       = true
   name         = "${var.app_name}-${var.app_alb_sg_name}-${var.app_environment}"
   description  = "Security group for user-service with custom ports open within VPC"
   vpc_id       = module.app_vpc.vpc_id

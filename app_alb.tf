@@ -15,7 +15,7 @@ module "alb" {
     {
       port               = 443
       protocol           = "HTTPS"
-      certificate_arn    = "${aws_acm_certificate.test_cert.arn}"
+      certificate_arn    = "${aws_acm_certificate.alb_test_cert.arn}"
       target_group_index = 0
     }
   ]
